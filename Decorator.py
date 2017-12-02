@@ -1,7 +1,11 @@
+'''
+The print line at end is a decorator that adds the functionality
+of appending ====================== at the end of each function
+'''
 def print_line_atend(func):
 	def wrapper(*args,**kwargs):
 		func(*args,**kwargs)
-		print '======================================================='
+		print '======================================================= END Of',func.__name__
 	return wrapper
 
 
@@ -29,7 +33,9 @@ The syntax is the * and **.
 The names *args and **kwargs are only by convention but there's no hard requirement to use them.
 '''
 def hello():
-	print 'hello world'
+	print 'This is the hello function'
+
+@print_line_atend
 def understand_args(*args):
 	print type(args),len(args),args
 	for arg in args:
@@ -40,13 +46,17 @@ understand_args('hello','world','this','is','Yijie',hello)
 
 
 
+@print_line_atend
+def understand_kwargs(**kwargs):
+	print type(kwargs),len(kwargs),kwargs
+	for key in kwargs:
+		print 'key is',key,'value is',kwargs[key]
+
+understand_kwargs(name='Yijie',gender='Male',id=12345)
 
 
 
-
-
-
-#Example 1
+#Example 1 of Decorator
 '''
 No parameters for the inner functiuon 
 No parameters for the decorator
@@ -55,15 +65,43 @@ Suppose you have a foo function and you
 later want to add some functionality that
 print Starts before executing this foo function
 
+
+One easy way you can think of is pass the foo function itself 
+as a parameter into another wrapper function called decorator 
+and add some things in the decorator function
+
+But remember, The original function we want to have is foo!!! not
+this decorator function, what we actually want to acheieve is still 
+call this foo function but with the added functionalities
+
+
 '''
 def foo():
 	print 'This is foo'
 
+@print_line_atend
 def decorator(func):
 	print 'Starts!'
+	func()
+
+decorator(foo)
+
+
+
+
+
+
+def betterfoo():
+	print 'This is better foo'
+
+def decorator(func):
 	def wrapper():
 		func()
 	return wrapper
 
-foo=decorator(foo)
-foo()
+betterfoo=decorator(betterfoo)
+betterfoo()
+
+
+
+
