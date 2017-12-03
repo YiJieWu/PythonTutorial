@@ -96,26 +96,51 @@ def foo():
 	print 'This is foo'
 
 @print_line_atend
-def decorator(func):
+def decorator1(func):
 	print 'Starts!'
 	func()
 
-decorator(foo)
+decorator1(foo)
 
 
+#################################################
+'''
+These 2 are equivalent
 
-
-
+'''
 
 def betterfoo():
 	print 'This is better foo'
 
-def decorator(func):
+def decorator2(func):
 	def wrapper():
+		print 'say hello in decorator'
 		func()
 	return wrapper
 
-betterfoo=decorator(betterfoo)
+
+
+betterfoo=print_line_atend(decorator2(betterfoo))
+betterfoo()
+
+
+
+
+
+
+
+def decorator2(func):
+	def wrapper():
+		print 'say hello in decorator'
+		func()
+	return wrapper
+
+
+@print_line_atend
+@decorator2
+def betterfoo():
+	print 'This is better foo'
+
 betterfoo()
 
 
