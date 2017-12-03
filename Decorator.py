@@ -13,6 +13,22 @@ def print_line_atend(func):
 In order to understand decorator, you first need to understand that in 
 Python and many other prigramming languages,you can pass a function as
 parameter into another function and call it within that function
+
+
+this @print_line_atend is the same thing as
+
+
+def foo1():
+	print 'Passing foo1 as parameter'
+
+def call_function(fun):
+	fun()
+
+call_function=print_line_atend(call_function)
+call_function(foo1)
+
+
+
 '''
 def foo1():
 	print 'Passing foo1 as parameter'
@@ -101,7 +117,5 @@ def decorator(func):
 
 betterfoo=decorator(betterfoo)
 betterfoo()
-
-
 
 
