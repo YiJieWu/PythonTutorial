@@ -105,7 +105,7 @@ decorator1(foo)
 
 #################################################
 '''
-These 2 are equivalent,
+These 2 are equivalent,,
 
 '''
 
