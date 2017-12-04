@@ -105,7 +105,12 @@ decorator1(foo)
 
 #################################################
 '''
-These 2 are equivalent,,,
+These 2 are equivalent
+In the first one 
+
+
+In the second one, it illustrayes the ideas of 
+chain of decorators.
 
 '''
 
@@ -143,4 +148,21 @@ def betterfoo():
 
 betterfoo()
 
+'''
+Now lets try to understand decorator with
+args
+'''
 
+def my_print():
+	print 'IN print'
+
+def decorator3(myarg1='hello',myarg2='world'):
+	def inner(func):
+		def wrapper(*args,**kwargs):
+			print myarg1,myarg2
+			func()
+		return wrapper
+	return inner
+
+my_print=decorator3('Fuck','Phyllis')(my_print)
+my_print()
